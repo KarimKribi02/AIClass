@@ -1,18 +1,17 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const { Port,connectDB } = require('./config/mogodb');
 const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
+const admin = require('./Config/firebase');
 
 app.use(express.json());
 const cors = require('cors');
 
+connectDB();
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
 
-app.listen(process.env.PORT , () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(Port , () => {
+  console.log(`Server is running on port ${Port}`);
 }
 )
